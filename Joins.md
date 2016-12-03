@@ -47,8 +47,8 @@
 4. Compute the Lookup Costs for each of the indexes relations T1 thru T4. (Note: Costs is to lookup 1 tuple in page units!)
    1.  Equations
        1. Hash Index Cost = 1
-       2. Primary Tree Index Cost = ceiling(log<sub>DE/Page</sub>(# of Relation Pages)) + 1
-       3. Secondary Tree Index Cost = ceiling(log<sub>DE/Page</sub>(# of Relation Pages)) + 2
+       2. Primary Tree Index Cost = ceiling(log<sub>DE&frasl;Page</sub>(# of Relation Pages)) + 1
+       3. Secondary Tree Index Cost = ceiling(log<sub>DE&frasl;Page</sub>(<sup># of Relation Tuples<sup>&frasl;<sub>DE/Page<sub>)) + 2
    2.  T1: Primary Tree Index = 3
        1.  ceiling(Log<sub>40</sub>(1000)) + 1 = ceiling(1.872) + 1 = 2 + 1 = 3 
    3.  T2: Primary Hash Index = 1  
