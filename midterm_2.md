@@ -340,6 +340,9 @@ So we have found three keys for the relation: __Y__, __WX__ and __XZ__.
    1. Floor((Page Size * Fill Factor)/ Dir Entry Size) = floor ((400\*0.5/5)/ 5) = 40 DE/page
    2. Floor((Page Size * Fill Factor)/ Tuple Size) = floor ((400\*0.5/5)/ 5) = 2 Tups/page
 2. Compute the Page Sizes for each of the relations T1 thru T4.
-   1. | Attribute\Relation |    T1    |    T2    |    T3    |    T4    |     
+
+      | Attribute\Relation |    T1    |    T2    |    T3    |    T4    |     
       |--------------------|----------|----------|----------|----------|
       |       Tuples       |  2000    |  20000   |    20    |  200000  |
+      
+3. Step 3
