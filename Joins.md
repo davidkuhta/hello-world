@@ -16,8 +16,8 @@
 
 ### Prepartion Steps 
 1. Compute the Directory Entries Per Page
-   1.  floor(<sup>Page Size * Fill Factor</sup>&frasl;<sub>Dir Entry Size</sub> 
-   2.  floor(<sup>400 * 0.5</sup>&frasl;<sub>5</sub> 
+   1.  floor(<sup>Page Size * Fill Factor</sup>&frasl;<sub>Dir Entry Size</sub>)  
+   2.  floor(<sup>400 * 0.5</sup>&frasl;<sub>5</sub>) 
    3.  40 <sup>DEs</sup>&frasl;<sub>Page</sub>
    
 |Fill Factor|Dir. Entry Size|Tuple Size|Page Size|DE/Page|    
@@ -25,8 +25,8 @@
 |     0.5   |    5 bytes    | 100 bytes|400 bytes|  40   |  
 
 2. Compute the Tuples Per Page
-   1.  floor(<sup>Page Size * Fill Factor</sup>&frasl;<sub>Tuple Size</sub> 
-   2.  floor(<sup>400 * 0.5</sup>&frasl;<sub>100</sub>  
+   1.  floor(<sup>Page Size * Fill Factor</sup>&frasl;<sub>Tuple Size</sub>) 
+   2.  floor(<sup>400 * 0.5</sup>&frasl;<sub>100</sub>)  
    3.  2 <sup>Tups</sup>&frasl;<sub>Page</sub>
 
 |Fill Factor|Dir. Entry Size|Tuple Size|Page Size|DE/Page|Tups/Page|    
