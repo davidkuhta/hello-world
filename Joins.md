@@ -43,6 +43,44 @@
 |-------------------:|:--------:|:--------:|:--------:|:--------:|
 |       Tuples       |  2000    |  20000   |    20    |  200000  | 
 |       Pages        |  1000    |  10000   |    10    |  100000  |  
+
+4. Compute the Lookup Costs for each of the indexes relations T1 thru T4. (Note: Costs is to lookup 1 tuple in page units!)
+   1.  Equations
+       1. Hash Index Cost = 1
+       2. Primary Tree Index Cost = ceiling(log<sub>DE/Page</sub>(# of Relation Pages)) + 1
+       3. Secondary Tree Index Cost = ceiling(log<sub>DE/Page</sub>(# of Relation Pages)) + 2
+   2.  T1: Primary Tree Index = 3
+       1.  ceiling(Log<sub>40<sub>(1000)) + 1 = ceiling(1.872) + 1 = 2 + 1 = 3 
+   3.  T2: Primary Hash Index = 1  
+   3.  T2: Secondary Tree Index = 4
+       1.  ceiling(Log<sub>40<sub>(10000)) + 1 = ceiling(2.496) + 1 = 3 + 1 = 4 
+   4.  T3: Primary Tree Index = 2
+       1.  ceiling(Log<sub>40<sub>(10)) + 1 = ceiling(.624) + 1 = 1 + 1 = 2  
+   4.  T2: Secondary Tree Index = 5
+       1.  ceiling(Log<sub>40<sub>(100000)) + 1 = ceiling(3.12) + 1 = 4 + 1 = 5   
+   4.  T2: Secondary Tree Index = 5
+       1.  ceiling(Log<sub>40<sub>(100000)) + 1 = ceiling(3.12) + 1 = 4 + 1 = 5  
+
+| Attribute\Relation |    T1    |    T2    |    T3    |    T4    |      
+|-------------------:|:--------:|:--------:|:--------:|:--------:|
+|       Tuples       |  2000    |  20000   |    20    |  200000  | 
+|       Pages        |  1000    |  10000   |    10    |  100000  |  
       
 ### Solution Steps
-1.  
+1.  Find the Relation with the least number of tuples and compare the cost of of joining against the other
+   1. T3 < T1 < T2 < T4
+   
+| T3 ⋈<sub>attr</sub> TX Cost   |    T1    |    T2    |    T4    |   
+|-------------------------------:|:--------:|:--------:|:--------:|
+|       Tuples                   |  2000    |  20000   |    20    |  
+| Hash Inner Nested Loop         |          |     ✓    |          |  
+|Primary BTree Inner Nested Loop |     ✓    |          |          |  
+|Seconary BTree Inner Nested Loop|          |          |    ✓     |  
+|Nested Loops                    |     ✓    |          |     ✓    |   
+|Hash Join                       |     ✓    |          |     ✓    |    
+
+Hash-INL	Index nested loops using Hash Index
+Primary-BTree-INL	Index nested loops using Primary BTree
+Sec-BTree-INL	Index nested loops using Secondary BTree
+NL	Nested loops
+HashJoin	Hash Join
