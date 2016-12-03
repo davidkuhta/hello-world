@@ -24,7 +24,7 @@
 |:---------:|:-------------:|:--------:|:-------:|:-----:|     
 |     0.5   |    5 bytes    | 100 bytes|400 bytes|  40   |  
 
-1. Compute the Tuples Per Page
+2. Compute the Tuples Per Page
    1.  floor((Page Size * Fill Factor)/ Dir Entry Size)
    2.  floor ((400\*0.5/100)/ 5)
    3.  2 Tups/page
@@ -33,10 +33,16 @@
 |:---------:|:-------------:|:--------:|:-------:|:-----:|:-------:|   
 |     0.5   |    5 bytes    | 100 bytes|400 bytes|  40   |    2    |  
 
-2. Compute the Page Sizes for each of the relations T1 thru T4.
+3. Compute the Page Sizes for each of the relations T1 thru T4. (Note: we need to end up in units of pages!)
+   1.  T1 = (2000 Tuples / 2 (Tuples/Page)) = 1000 Pages  
+   1.  T2 = (20000 Tuples / 2 (Tuples/Page)) = 10000 Pages  
+   1.  T3 = (20 Tuples / 2 (Tuples/Page)) = 10 Pages  
+   1.  T4 = (200000 Tuples / 2 (Tuples/Page)) = 100000 Pages  
 
-| Attribute\Relation |    T1    |    T2    |    T3    |    T4    |     
-|--------------------|----------|----------|----------|----------|    
-|       Tuples       |  2000    |  20000   |    20    |  200000  |
+| Attribute\Relation |    T1    |    T2    |    T3    |    T4    |      
+|-------------------:|:--------:|:--------:|:--------:|:--------:|
+|       Tuples       |  2000    |  20000   |    20    |  200000  | 
+|       Pages        |  1000    |  10000   |    10    |  100000  |  
       
-3. Step 3
+### Solution Steps
+1.  
