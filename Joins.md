@@ -75,7 +75,8 @@
 ### Solution Steps
 1.  Find the Relation with the least number of tuples and compare the cost of of joining against the other
    1. T3 < T1 < T2 < T4
-   
+ 
+<li>
 | T3 ⋈<sub>attr</sub> TX Cost   |    T1    |    T2    |    T4    |   
 |-------------------------------:|:--------:|:--------:|:--------:| 
 | Hash Inner Nested Loop         |     ✖    |10 + 20(1)|    ✖     |  
@@ -91,6 +92,7 @@
 |Seconary BTree Inner Nested Loop|     ✖    |    ✖     |   110    |  
 |Nested Loops                    |40010     |400010    |4000010   |   
 |Hash Join                       |1030      |10030     |100030    |   
+</li>
 
 2. We observe that the Index Nested Loop using the T2 Hash Index is the least costly operation with a 30 page cost.
 3. We now compare the cost of joining (T3T2) against the other relations.
@@ -114,7 +116,7 @@
 4. We observe that the Index Nested Loop using the T1 Primary B-Tree Index is the least costly operation with a cumulative 90 page cost.
 5. We now calculate the cost of joining (T3T2)T1 against the last relation.
 
-| ((T3 ⋈<sub>attr</sub>T2) ⋈<sub>attr</sub> T1) ⋈<sub>attr</sub>T4 Cost|  T1   | 
+| ((T3 ⋈<sub>attr</sub>T2) ⋈<sub>attr</sub> T1) ⋈<sub>attr</sub>T4 Cost|  T4   | 
 |----------------------------------------------------------------------:|:-----:| 
 | Hash INL                                                              |   ✖   |  
 |Primary BTree INL                                                      |  ✖    |  
@@ -122,7 +124,7 @@
 |Nested Loops                                                           |40030  |   
 |Hash Join                                                              |1050   |   
 
-| ((T3 ⋈<sub>attr</sub>T2) ⋈<sub>attr</sub> T1) ⋈<sub>attr</sub>T4 Cost|  T1   | 
+| ((T3 ⋈<sub>attr</sub>T2) ⋈<sub>attr</sub> T1) ⋈<sub>attr</sub>T4 Cost|  T4   | 
 |----------------------------------------------------------------------:|:-----:| 
 | Hash INL                                                              |   ✖   |  
 |Primary BTree INL                                                      |90     |  
