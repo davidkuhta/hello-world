@@ -50,16 +50,16 @@
        2. Primary Tree Index Cost = ceiling(log<sub>DE/Page</sub>(# of Relation Pages)) + 1
        3. Secondary Tree Index Cost = ceiling(log<sub>DE/Page</sub>(# of Relation Pages)) + 2
    2.  T1: Primary Tree Index = 3
-       1.  ceiling(Log<sub>40<sub>(1000)) + 1 = ceiling(1.872) + 1 = 2 + 1 = 3 
+       1.  ceiling(Log<sub>40</sub>(1000)) + 1 = ceiling(1.872) + 1 = 2 + 1 = 3 
    3.  T2: Primary Hash Index = 1  
    3.  T2: Secondary Tree Index = 4
-       1.  ceiling(Log<sub>40<sub>(10000)) + 1 = ceiling(2.496) + 1 = 3 + 1 = 4 
+       1.  ceiling(Log<sub>40</sub>(10000)) + 1 = ceiling(2.496) + 1 = 3 + 1 = 4 
    4.  T3: Primary Tree Index = 2
-       1.  ceiling(Log<sub>40<sub>(10)) + 1 = ceiling(.624) + 1 = 1 + 1 = 2  
+       1.  ceiling(Log<sub>40</sub>(10)) + 1 = ceiling(.624) + 1 = 1 + 1 = 2  
    4.  T2: Secondary Tree Index = 5
-       1.  ceiling(Log<sub>40<sub>(100000)) + 1 = ceiling(3.12) + 1 = 4 + 1 = 5   
+       1.  ceiling(Log<sub>40</sub>(100000)) + 1 = ceiling(3.12) + 1 = 4 + 1 = 5   
    4.  T2: Secondary Tree Index = 5
-       1.  ceiling(Log<sub>40<sub>(100000)) + 1 = ceiling(3.12) + 1 = 4 + 1 = 5  
+       1.  ceiling(Log<sub>40</sub>(100000)) + 1 = ceiling(3.12) + 1 = 4 + 1 = 5  
 
 | Attribute\Relation |    T1    |    T2    |    T3    |    T4    |      
 |-------------------:|:--------:|:--------:|:--------:|:--------:|
