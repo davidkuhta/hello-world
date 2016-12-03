@@ -76,7 +76,7 @@
 1.  Find the Relation with the least number of tuples and compare the cost of of joining against the other
    1. T3 < T1 < T2 < T4
  
-<li>
+<li>  
 | T3 ⋈<sub>attr</sub> TX Cost   |    T1    |    T2    |    T4    |   
 |-------------------------------:|:--------:|:--------:|:--------:| 
 | Hash Inner Nested Loop         |     ✖    |10 + 20(1)|    ✖     |  
