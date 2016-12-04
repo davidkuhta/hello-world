@@ -6,7 +6,7 @@
 |     0.5   |    5 bytes    | 100 bytes|400 bytes|
 
 ### Relations
-| Attribute\Relation |    T1    |    T2    |    T3    |    T4    |    
+| Attribute\Relation |T<sub>1</sub>|T<sub>2</sub>|T<sub>3</sub>|T<sub>4</sub>|   
 |-------------------:|:--------:|:--------:|:--------:|:--------:|
 |       Tuples       |  2000    |  20000   |    20    |  200000  |  
 | Primary Hash Index |          |     ✓    |          |          |  
@@ -34,12 +34,12 @@
 |     0.5   |    5 bytes    | 100 bytes|400 bytes|  40   |    2    |  
 
 3. Compute the Page Sizes for each of the relations T1 thru T4. (Note: we need to end up in units of pages!)
-   1.  T1 = <sup>2000 Tuples</sup>&frasl;<sub>2 Tuples/Page</sub> = 1000 Pages  
-   1.  T2 = <sup>20000 Tuples</sup>&frasl;<sub>2 Tuples/Page</sub> = 10000 Pages  
-   1.  T3 = <sup>20 Tuples</sup>&frasl;<sub>2 Tuples/Page</sub> = 10 Pages  
-   1.  T4 = <sup>200000 Tuples</sup>&frasl;<sub>2 Tuples/Page</sub> = 100000 Pages  
+   1.  T<sub>1</sub> = <sup>2000 Tuples</sup>&frasl;<sub>2 Tuples/Page</sub> = 1000 Pages  
+   1.  T<sub>2</sub> = <sup>20000 Tuples</sup>&frasl;<sub>2 Tuples/Page</sub> = 10000 Pages  
+   1.  T<sub>3</sub> = <sup>20 Tuples</sup>&frasl;<sub>2 Tuples/Page</sub> = 10 Pages  
+   1.  T<sub>4</sub> = <sup>200000 Tuples</sup>&frasl;<sub>2 Tuples/Page</sub> = 100000 Pages  
 
-| Attribute\Relation |    T1    |    T2    |    T3    |    T4    |      
+| Attribute\Relation |T<sub>1</sub>|T<sub>2</sub>|T<sub>3</sub>|T<sub>4</sub>|        
 |-------------------:|:--------:|:--------:|:--------:|:--------:|
 |       Tuples       |  2000    |  20000   |    20    |  200000  | 
 |       Pages        |  1000    |  10000   |    10    |  100000  |  
@@ -67,7 +67,7 @@
        2.  ceiling(Log<sub>40</sub>(5000)) + 2 = 
        3.  ceiling(2.3) + 2 = 3 + 2 = 5  
 
-| Attribute\Relation |    T1    |    T2    |    T3    |    T4    |      
+| Attribute\Relation |T<sub>1</sub>|T<sub>2</sub>|T<sub>3</sub>|T<sub>4</sub>|      
 |-------------------:|:--------:|:--------:|:--------:|:--------:|
 |       Tuples       |  2000    |  20000   |    20    |  200000  | 
 |       Pages        |  1000    |  10000   |    10    |  100000  |  
@@ -76,14 +76,14 @@
 
 <details> 
   <summary>1. Find the Relation with the least number of tuples</summary><br />
-  T3 &lt; T1 &lt; T2 &lt; T4
+  T<sub>3</sub> &lt; T<sub>1</sub> &lt; T<sub>2</sub> &lt; T<sub>4</sub>
 </details>
 
 
 <details> 
   <summary>2. Compare the cost of of joining against the other</summary><br />
 
-| T3 ⋈<sub>attr</sub> TX Cost   |    T1    |    T2    |    T4    |   
+| T<sub>3</sub> ⋈<sub>attr</sub> T<sub>X</sub> Cost   |    T<sub>1</sub>    |    T<sub>2</sub>    |    T<sub>4</sub>    |   
 |-------------------------------:|:--------:|:--------:|:--------:| 
 | Hash Inner Nested Loop         |     ✖    |10 + 20(1)|    ✖     |  
 |Primary BTree Inner Nested Loop |10 + 20(3)|    ✖     |    ✖     |  
@@ -91,7 +91,7 @@
 |Nested Loops                    |10 + 2(10)(2000)|10 + 2(10)(20000)|10 + 2(10)(200000)|   
 |Hash Join                       |10+1000+20(1)|10+10000+20(1)|10+100000+20(1)|    
 
-| T3 ⋈<sub>attr</sub> TX Cost   |    T1    |    T2    |    T4    |   
+| T<sub>3</sub> ⋈<sub>attr</sub> T<sub>X</sub> Cost    |    T<sub>1</sub>    |    T<sub>2</sub>    |    T<sub>4</sub>    | 
 |-------------------------------:|:--------:|:--------:|:--------:| 
 | Hash Inner Nested Loop         |     ✖    |   30     |    ✖     |  
 |Primary BTree Inner Nested Loop |    70    |    ✖     |   110    |  
@@ -100,13 +100,13 @@
 |Hash Join                       |1030      |10030     |100030    |   
 
 We observe that the Index Nested Loop using the T2 Hash Index is the least costly operation with a 30 page cost.  
-R1 = T3 Hash-INL T2
+R<sub>1</sub> = T<sub>3</sub> Hash-INL T<sub>2</sub>
 </details>
 
 <details> 
   <summary>3. Compare the cost of joining R1 against the other relations</summary><br />
 
-| (T3 ⋈<sub>attr</sub>T2) ⋈<sub>attr</sub> TX Cost   |    T1    |    T4    |   
+| (T<sub>3</sub> ⋈<sub>attr</sub>T<sub>2</sub>) ⋈<sub>attr</sub> T<sub>X</sub> Cost   |    T<sub>1</sub>    |    T<sub>4</sub>    |   
 |-------------------------------:|:--------:|:--------:|  
 | Hash Inner Nested Loop         |     ✖    |    ✖     |  
 |Primary BTree Inner Nested Loop |30 + 20(3)|30 + 20(3)|  
@@ -114,7 +114,7 @@ R1 = T3 Hash-INL T2
 |Nested Loops                    |30 + 2(10)(2000)|30 + 2(10)(200000)|   
 |Hash Join                       |30+1000+20(1)|30+100000+20(1)|    
 
-| (T3 ⋈<sub>attr</sub>T2) ⋈<sub>attr</sub> TX Cost|  T1   |  T4    |   
+| (T<sub>3</sub> ⋈<sub>attr</sub>T<sub>2</sub>) ⋈<sub>attr</sub> T<sub>X</sub> Cost|  T<sub>1</sub>   |  T<sub>4</sub>    |   
 |-------------------------------------------------:|:-----:|:------:|  
 | Hash INL                                         |   ✖   |    ✖   |  
 |Primary BTree INL                                 |90     |130     |  
@@ -122,13 +122,13 @@ R1 = T3 Hash-INL T2
 |Nested Loops                                      |40030  |400030  |   
 |Hash Join                                         |1050   |100050  | 
  We observe that the Index Nested Loop using the T1 Primary B-Tree Index is the least costly operation with a cumulative 90 page cost.  
-R2 = R1 Primary-B-Tree-INL T1
+R<sub>2</sub> = R<sub>1</sub> Primary-B-Tree-INL T<sub>1</sub>
 </details>
 
 <details> 
   <summary>4. Calculate the cost of joining R1 against the last relation</summary><br />
 
-| ((T3 ⋈<sub>attr</sub>T2) ⋈<sub>attr</sub> T1) ⋈<sub>attr</sub>T4 Cost|  T4   | 
+| ((T<sub>3</sub> ⋈<sub>attr</sub>T<sub>2</sub>) ⋈<sub>attr</sub> T1) ⋈<sub>attr</sub> T<sub>4</sub> Cost|  T<sub>4</sub>   | 
 |----------------------------------------------------------------------:|:-----:| 
 | Hash INL                                                              |   ✖   |  
 |Primary BTree INL                                                      |90 + 20(5)|  
@@ -136,7 +136,7 @@ R2 = R1 Primary-B-Tree-INL T1
 |Nested Loops                                                           |90 + 2(10)(2000)|30 + 2(10)(200000)|   
 |Hash Join                                                              |90+100000+20(1)|   
 
-| ((T3 ⋈<sub>attr</sub>T2) ⋈<sub>attr</sub> T1) ⋈<sub>attr</sub>T4 Cost|  T4   | 
+| ((T<sub>3</sub> ⋈<sub>attr</sub>T<sub>2</sub>) ⋈<sub>attr</sub> T1) ⋈<sub>attr</sub> T<sub>4</sub> Cost|  T<sub>4</sub>   | 
 |----------------------------------------------------------------------:|:-----:| 
 | Hash INL                                                              |   ✖   |  
 |Primary BTree INL                                                      |190    |  
@@ -146,5 +146,5 @@ R2 = R1 Primary-B-Tree-INL T1
 
 We identify that an Index Nested Loop join using either the Primary B-Tree or Secondary B-Tree equivalently incur the least cost.  
 We select the Primary B-Tree and formulate the final relation.  
-R3 = R2 Primary-B-Tree-INL T4 with estimated cost 190.
+R<sub>3</sub> = R<sub>2</sub> Primary-B-Tree-INL T<sub>4</sub> with estimated cost 190.
 </details>
