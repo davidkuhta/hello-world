@@ -73,6 +73,13 @@
 |       Pages        |  1000    |  10000   |    10    |  100000  |  
       
 ### Solution Steps
+
+<details> 
+  <summary>1. Find the Relation with the least number of tuples and compare the cost of of joining against the other</summary><br />
+  an association among two or more entities.
+  T3 < T1 < T2 < T4
+  
+</details>
 1)  Find the Relation with the least number of tuples and compare the cost of of joining against the other
     T3 < T1 < T2 < T4
  
