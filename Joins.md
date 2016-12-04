@@ -75,14 +75,14 @@
 ### Solution Steps
 
 <details> 
-  <summary>1. Find the Relation with the least number of tuples and compare the cost of of joining against the other</summary><br />
-  an association among two or more entities.
-  T3 < T1 < T2 < T4
-  
+  <summary>1. Find the Relation with the least number of tuples</summary><br />
+  T3 &lt; T1 &lt; T2 &lt; T4
 </details>
-1)  Find the Relation with the least number of tuples and compare the cost of of joining against the other
-    T3 < T1 < T2 < T4
- 
+
+
+<details> 
+  <summary>2. Compare the cost of of joining against the other</summary><br />
+
 | T3 ⋈<sub>attr</sub> TX Cost   |    T1    |    T2    |    T4    |   
 |-------------------------------:|:--------:|:--------:|:--------:| 
 | Hash Inner Nested Loop         |     ✖    |10 + 20(1)|    ✖     |  
@@ -95,9 +95,11 @@
 |-------------------------------:|:--------:|:--------:|:--------:| 
 | Hash Inner Nested Loop         |     ✖    |   30     |    ✖     |  
 |Primary BTree Inner Nested Loop |    70    |    ✖     |   110    |  
-|Secondary BTree Inner Nested Loop|     ✖    |    ✖     |   110    |  
+|Secondary BTree Inner Nested Loop|    ✖    |    ✖     |   110    |  
 |Nested Loops                    |40010     |400010    |4000010   |   
 |Hash Join                       |1030      |10030     |100030    |   
+
+</details>
 
 2) We observe that the Index Nested Loop using the T2 Hash Index is the least costly operation with a 30 page cost.
 R1 = T3 Hash-INL T2
