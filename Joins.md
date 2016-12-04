@@ -73,15 +73,14 @@
 |       Pages        |  1000    |  10000   |    10    |  100000  |  
       
 ### Solution Steps
-1.  Find the Relation with the least number of tuples and compare the cost of of joining against the other
-   1. T3 < T1 < T2 < T4
+1)  Find the Relation with the least number of tuples and compare the cost of of joining against the other
+    T3 < T1 < T2 < T4
  
-<li>  
 | T3 ⋈<sub>attr</sub> TX Cost   |    T1    |    T2    |    T4    |   
 |-------------------------------:|:--------:|:--------:|:--------:| 
 | Hash Inner Nested Loop         |     ✖    |10 + 20(1)|    ✖     |  
 |Primary BTree Inner Nested Loop |10 + 20(3)|    ✖     |    ✖     |  
-|Seconary BTree Inner Nested Loop|10 + 20(5)|    ✖     |10 + 20(5)|  
+|Secondary BTree Inner Nested Loop|10 + 20(5)|    ✖     |10 + 20(5)|  
 |Nested Loops                    |10 + 2(10)(2000)|10 + 2(10)(20000)|10 + 2(10)(200000)|   
 |Hash Join                       |10+1000+20(1)|10+10000+20(1)|10+100000+20(1)|    
 
@@ -89,19 +88,20 @@
 |-------------------------------:|:--------:|:--------:|:--------:| 
 | Hash Inner Nested Loop         |     ✖    |   30     |    ✖     |  
 |Primary BTree Inner Nested Loop |    70    |    ✖     |   110    |  
-|Seconary BTree Inner Nested Loop|     ✖    |    ✖     |   110    |  
+|Secondary BTree Inner Nested Loop|     ✖    |    ✖     |   110    |  
 |Nested Loops                    |40010     |400010    |4000010   |   
 |Hash Join                       |1030      |10030     |100030    |   
-</li>
 
-2. We observe that the Index Nested Loop using the T2 Hash Index is the least costly operation with a 30 page cost.
-3. We now compare the cost of joining (T3T2) against the other relations.
+2) We observe that the Index Nested Loop using the T2 Hash Index is the least costly operation with a 30 page cost.
+R1 = T3 Hash-INL T2
+
+3) We now compare the cost of joining (T3T2) against the other relations.
 
 | (T3 ⋈<sub>attr</sub>T2) ⋈<sub>attr</sub> TX Cost   |    T1    |    T4    |   
 |-------------------------------:|:--------:|:--------:|  
 | Hash Inner Nested Loop         |     ✖    |    ✖     |  
 |Primary BTree Inner Nested Loop |30 + 20(3)|30 + 20(3)|  
-|Seconary BTree Inner Nested Loop|     ✖    |30 + 20(5)|  
+|Secondary BTree Inner Nested Loop|     ✖    |30 + 20(5)|  
 |Nested Loops                    |30 + 2(10)(2000)|30 + 2(10)(200000)|   
 |Hash Join                       |30+1000+20(1)|30+100000+20(1)|    
 
@@ -109,25 +109,38 @@
 |-------------------------------------------------:|:-----:|:------:|  
 | Hash INL                                         |   ✖   |    ✖   |  
 |Primary BTree INL                                 |90     |130     |  
-|Seconary BTree INL                                |   ✖    |130     |  
+|Secondary BTree INL                                |   ✖    |130     |  
 |Nested Loops                                      |40030  |400030  |   
 |Hash Join                                         |1050   |100050  | 
 
-4. We observe that the Index Nested Loop using the T1 Primary B-Tree Index is the least costly operation with a cumulative 90 page cost.
-5. We now calculate the cost of joining (T3T2)T1 against the last relation.
+4) We observe that the Index Nested Loop using the T1 Primary B-Tree Index is the least costly operation with a cumulative 90 page cost.
+R2 = R1 Primary-B-Tree-INL T1
+5) We now calculate the cost of joining (T3T2)T1 against the last relation.
+
+| (T3 ⋈<sub>attr</sub>T2) ⋈<sub>attr</sub> TX Cost   |    T1    |    T4    |   
+|-------------------------------:|:--------:|:--------:|  
+| Hash Inner Nested Loop         |     ✖    |    ✖     |  
+|Primary BTree Inner Nested Loop |30 + 20(3)|30 + 20(5)|  
+|Secondary BTree Inner Nested Loop|     ✖    |30 + 20(5)|  
+|Nested Loops                    |30 + 2(10)(2000)|30 + 2(10)(200000)|   
+|Hash Join                       |30+1000+20(1)|30+100000+20(1)| 
 
 | ((T3 ⋈<sub>attr</sub>T2) ⋈<sub>attr</sub> T1) ⋈<sub>attr</sub>T4 Cost|  T4   | 
 |----------------------------------------------------------------------:|:-----:| 
 | Hash INL                                                              |   ✖   |  
-|Primary BTree INL                                                      |  ✖    |  
-|Seconary BTree INL                                                     |130    |  
-|Nested Loops                                                           |40030  |   
-|Hash Join                                                              |1050   |   
+|Primary BTree INL                                                      |90 + 20(5)|  
+|Secondary BTree INL                                                     |90 + 20(5)|  
+|Nested Loops                                                           |90 + 2(10)(2000)|30 + 2(10)(200000)|   
+|Hash Join                                                              |90+100000+20(1)|   
 
 | ((T3 ⋈<sub>attr</sub>T2) ⋈<sub>attr</sub> T1) ⋈<sub>attr</sub>T4 Cost|  T4   | 
 |----------------------------------------------------------------------:|:-----:| 
 | Hash INL                                                              |   ✖   |  
-|Primary BTree INL                                                      |90     |  
-|Seconary BTree INL                                                     |130    |  
-|Nested Loops                                                           |40030  |   
-|Hash Join                                                              |1050   | 
+|Primary BTree INL                                                      |190    |  
+|Secondary BTree INL                                                    |190    |  
+|Nested Loops                                                           |400090 |   
+|Hash Join                                                              |100090 | 
+
+6) We identify that an Index Nested Loop join using either the Primary B-Tree or Secondary B-Tree equivalently incur the least cost.
+7) We select the Primary B-Tree and formulate the final relation
+R3 = R2 Primary-B-Tree-INL T4 with estimated cost 190.
