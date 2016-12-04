@@ -1,5 +1,6 @@
 # Join Problem Walkthroughs
-## Example 1
+<details> 
+  <summary>Example 1</summary><br />
 ### Stats
 |Fill Factor|Dir. Entry Size|Tuple Size|Page Size|    
 |:---------:|:-------------:|:--------:|:-------:|  
@@ -147,4 +148,5 @@ R<sub>2</sub> = R<sub>1</sub> Primary-B-Tree-INL T<sub>1</sub>
 We identify that an Index Nested Loop join using either the Primary B-Tree or Secondary B-Tree equivalently incur the least cost.  
 We select the Primary B-Tree and formulate the final relation.  
 R<sub>3</sub> = R<sub>2</sub> Primary-B-Tree-INL T<sub>4</sub> with estimated cost 190.
+</details>
 </details>
